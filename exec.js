@@ -1,6 +1,9 @@
 const child_process = require("child_process");
 const cron = require("node-cron");
 
+if (process.argv[2] == "now") {
+    require("./index");
+} else {
 console.log("Para ejecución inmediata use: $ node ./exec.js now");
 console.log("cron (* * * * 1-5) esperando...");
 cron.schedule("* * * * 1-5", () => {
@@ -11,13 +14,21 @@ cron.schedule("* * * * 1-5", () => {
     });
     console.log("GIT PULL LOG:\n ", actualizacion);
     console.log("-----------------------------");
-    console.log("testing changes");
+    child_process.exec("node exec now", (error, stdout, stderr) => {
+        if (error) {
+            console.error(`ERROR EN LA EJECUCIÓN: ${error}`);
+            return;
+        }
+        console.log(stdout);
+        console.error(`STREAM DE ERRORES: ${stderr || "No errors"}`);
+        console.log("-------------------------");
+    });
     console.log(
         "PROGRAMA EJECUTÁNDOSE...\n" +
             "ESPERANDO QUE FINALICE LA EJECUCIÓN PARA MOSTRAR EL STREAM DE SALIDA DEL PROCESO..."
     );
     });
-        
+}
 
 /* ESTE ES EL ARCHIVO EJECUTABLE DE HIGHQ2SHEETS
  * Si estamos en modo desarrollo, se ejecuta con el comando [$ node exec]
@@ -70,4 +81,4 @@ if (config.typeserver == "DESARROLLO") {
     }
 } else {
     console.log ("En el archivo 'config.js', el valor de 'config.typeserver' es distinto de 'DESARROLLO' y 'PRODUCCION'");
-}*/
+} */
