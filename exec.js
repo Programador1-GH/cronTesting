@@ -11,6 +11,10 @@ cron.schedule("* * * * 1-5", () => {
     });
     console.log("GIT PULL LOG:\n ", actualizacion);
     console.log("-----------------------------");
+    console.log(
+        "PROGRAMA EJECUTÁNDOSE...\n" +
+            "ESPERANDO QUE FINALICE LA EJECUCIÓN PARA MOSTRAR EL STREAM DE SALIDA DEL PROCESO..."
+    );
     });
         
 
