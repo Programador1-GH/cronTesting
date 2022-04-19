@@ -6,9 +6,11 @@ if (process.argv[2] == "now") {
 } else {
 console.log("Para ejecución inmediata use: $ node ./exec.js now");
 console.log("cron (* * * * 1-5) esperando...");
+let cont = 0;
 cron.schedule("* * * * 1-5", () => {
+    cont++;
     console.log("-----------------------------");
-    console.log("Esta tarea se ejecuta cada minuto");
+    console.log("Esta tarea se ejecuta cada minuto",cont);
     const actualizacion = child_process.execSync("git pull", {
         encoding: "utf-8",
     });
