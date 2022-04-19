@@ -6,7 +6,7 @@ console.log("cron (* * * * 1-5) esperando...");
 cron.schedule("* * * * 1-5", () => {
     console.log("-----------------------------");
     console.log("Esta tarea se ejecuta cada minuto");
-    const actualizacion = child_process.execSync("git status", {
+    const actualizacion = child_process.execSync("git pull", {
         encoding: "utf-8",
     });
     console.log("GIT PULL LOG:\n ", actualizacion);
